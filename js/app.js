@@ -14,7 +14,6 @@ $(function () {
     var line_3 = $('#line_3');
     var restart_div = $('#restart_div');
     var restart_btn = $('#restart');
-    var isOver = $('#game-over');
     var score = $('#score');
     var high_score = localStorage.getItem('high_score');
     $('#high_score').text(high_score);
@@ -101,6 +100,7 @@ $(function () {
             move_down = requestAnimationFrame(down);
         }
     }
+
     /* Move the cars and lines */
     anim_id = requestAnimationFrame(repeat);
     function repeat() {
@@ -162,18 +162,19 @@ $(function () {
         setHighScore();
     }
 
-    function isGameOver(){
-        isOver.show();
+    function isGameOver() {
+        $('#game-over').css("display", "block");
     }
-    
+
     function setHighScore() {
         if (high_score < parseInt(score.text())) {
             high_score = parseInt(score.text());
             localStorage.setItem('high_score', parseInt(score.text()));
         }
         $('#high_score').text(high_score);
-        $('#game-over').display = 'block';
+        $('#game-over').css("display", "block");
     }
+
     /* ------------------------------GAME CODE ENDS HERE------------------------------------------- */
     function collision($div1, $div2) {
         var x1 = $div1.offset().left;
